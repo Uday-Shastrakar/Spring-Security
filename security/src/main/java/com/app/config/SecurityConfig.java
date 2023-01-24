@@ -21,8 +21,20 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterchain(HttpSecurity httpsecurity) throws Exception {
 
-		httpsecurity.csrf().disable().authorizeHttpRequests().requestMatchers("/home/public").permitAll().anyRequest()
-				.authenticated().and().formLogin();
+		httpsecurity.csrf().disable()
+		.authorizeHttpRequests()
+//		this is for all requests url from admin 
+//		.requestMatchers("home/admin**")
+		.requestMatchers("home/admin")
+		.hasRole("Admin")
+		.requestMatchers("home/normal")
+		.hasRole("NORMAL")
+		.requestMatchers("/home/public")
+		.permitAll()
+		.anyRequest()
+	    .authenticated()
+	    .and()
+	    .formLogin();
 
 		return httpsecurity.build();
 

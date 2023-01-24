@@ -2,6 +2,7 @@ package com.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity //for use directly on mappings in controller
 public class SecurityConfig {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -25,12 +27,12 @@ public class SecurityConfig {
 		.authorizeHttpRequests()
 //		this is for all requests url from admin 
 //		.requestMatchers("home/admin**")
-		.requestMatchers("home/admin")
+	/*	.requestMatchers("home/admin")
 		.hasRole("Admin")
 		.requestMatchers("home/normal")
 		.hasRole("NORMAL")
 		.requestMatchers("/home/public")
-		.permitAll()
+		.permitAll() */
 		.anyRequest()
 	    .authenticated()
 	    .and()

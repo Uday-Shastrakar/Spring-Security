@@ -31,12 +31,12 @@ public class SecurityConfig {
 	public UserDetailsService userDetailsService() {
         UserDetails normalUser = User
         		.withUsername("uday")
-        		.password("password")
+        		.password(passwordEncoder().encode("password"))
         		.roles("NORMAL")
         		.build();
         UserDetails adminUser = User
         		.withUsername("admin")
-        		.password("admin")
+        		.password(passwordEncoder().encode("admin"))
         		.roles("ADMIN")
         		.build();
         
